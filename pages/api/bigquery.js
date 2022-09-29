@@ -2,21 +2,25 @@
 
 const { client_email, dataset_id, private_key, project_id, table_id } = process.env
 
-if (!(client_email && dataset_id && private_key && project_id && table_id)) {
-    throw new Error('Environment Data missing')
-}
-
 // [START bigquery_client_json_credentials]
 // Creates a BigQuery client explicitly using service account credentials by specifying the private key file.
-const { BigQuery } = require('@google-cloud/bigquery')
 
 const options = {
     projectId: project_id,
     credentials: {
         client_email,
-        private_key
+        private_key: process.env.private_key
+        ? process.env.private_key.replace(/\\n/gm, "\n")
+        : undefined,
     }
 }
+console.log(options);
+
+if (!(client_email && dataset_id && options.credentials.private_key && project_id && table_id)) {
+    throw new Error('Environment Data missing')
+}
+
+const { BigQuery } = require('@google-cloud/bigquery')
 
 const bigquery = new BigQuery(options)
 // [END bigquery_client_json_credentials]
