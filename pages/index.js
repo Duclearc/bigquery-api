@@ -10,7 +10,7 @@ export default function Home() {
           Welcome to
         </h1>
         <h1 className={styles.title}>
-          <a href="https://lemundo.atlassian.net/wiki/spaces/DT/pages/2011758615/Ecommerce+Analytics">Lemundo's Ecommerce Analytics API</a>
+          <a href="https://lemundo.atlassian.net/wiki/spaces/DT/pages/2011758615/Ecommerce+Analytics">Lemundo&apos;s Ecommerce Analytics API</a>
         </h1>
 
         <p className={styles.description}>
