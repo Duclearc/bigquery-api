@@ -2,7 +2,7 @@
 
 const { client_email, dataset_id, private_key, project_id, table_id } = process.env
 
-if(!( client_email && dataset_id && private_key && project_id && table_id )) {
+if (!(client_email && dataset_id && private_key && project_id && table_id)) {
     throw new Error('Environment Data missing')
 }
 
@@ -28,8 +28,13 @@ async function loadDataToBigQuery(dataset_id, table_id, payload) {
         .dataset(dataset_id)
         .table(table_id)
         .insert(payload, function (err, response) {
-            console.log("error:" + JSON.stringify(err));
-            console.log("response:" + JSON.stringify(response));
+            if (err) {
+                throw new Error(err)
+            }
+            else if (response) {
+                console.log("error:" + JSON.stringify(err));
+                console.log("response:" + JSON.stringify(response));
+            }
         })
 }
 
